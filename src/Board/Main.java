@@ -12,15 +12,6 @@ import java.util.Scanner;
  */
 public class Main {
 
-    // public static void resetBoard(List<Integer> record, int position, int turn) {
-    //         record.clear();
-    //         record.add(0);
-    //         position = 0;
-    //         // int point = 0;
-            
-    //         turn = 0;
-    // }
-
     public static boolean checkBoard(List<Integer> record, List<Integer> user, List<Integer> prog, int input, int turn){
         // System.out.println(input);
         int i = 0;
@@ -137,13 +128,7 @@ public class Main {
     public static void main(String[] args) {
         Scanner scan = new Scanner(System.in);
         Random ran = new Random(10);
-        String[][] board = {
-            {" ", "|", " ", "|", " "},
-            {"-", "+", "-", "+", "-"},
-            {" ", "|", " ", "|", " "},
-            {"-", "+", "-", "+", "-"},
-            {" ", "|", " ", "|", " "}
-        };
+        String[][] board = {{" ", "|", " ", "|", " "},{"-", "+", "-", "+", "-"},{" ", "|", " ", "|", " "},{"-", "+", "-", "+", "-"},{" ", "|", " ", "|", " "}};
 
         List<Integer> record = new ArrayList<>();
         record.add(0);
@@ -157,15 +142,6 @@ public class Main {
         
         getBoard(board);
         while(showBoard(record, user, prog) && record.size() <= 9){
-            
-            // System.out.println("Start game? (y/n)");
-            // start =  scan.next();
-            // if(start.equals("y")){
-                //     resetBoard(record, position, turn);
-                // }else if(start.equals("n")){
-                    //     break;
-                    // }
-                    
                     
             switch (turn) {
                 case 0: 
@@ -190,7 +166,6 @@ public class Main {
                 // default throw new AssertionError();
             }
             getBoard(board);
-            System.out.println();
         }
 
 
