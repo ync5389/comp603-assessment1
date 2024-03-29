@@ -87,6 +87,7 @@ public class Main {
 
     public static boolean showBoard(List<Integer> record, List<Integer> user, List<Integer> prog) {
         boolean carryon = true;
+        int line = 0;
 
         List<List> board = new ArrayList<>();
         List one = Arrays.asList(1,2,3);
@@ -112,9 +113,13 @@ public class Main {
         for(List b: board) {
             if(user.containsAll(b)){
                 System.out.println("\n> You win !\n");
+                line++;
+                System.out.println("\n> x " + line +" line \n");
                 carryon = false;
             } else if(prog.containsAll(b)){
                 System.out.println("\n> Program win !\n");
+                line++;
+                System.out.println("\n> x " + line +" line \n");
                 carryon = false;
             } 
         }
@@ -141,10 +146,8 @@ public class Main {
         
         getBoard(board);
         System.out.println("\n> Would you like to start first ? (y/n)..\n");
-        try {
-            turn =  scan.nextLine();
-        } catch (java.util.InputMismatchException e) {
-        }
+        turn =  scan.nextLine();
+  
 
         while(showBoard(record, user, prog) && record.size() <= 9){
                     
