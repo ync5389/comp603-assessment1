@@ -12,7 +12,7 @@ import java.util.Scanner;
  */
 public class Main {
 
-    public static boolean checkBoard(List<Integer> record, List<Integer> user, List<Integer> prog, int input, int turn){
+    public static boolean checkBoard(List<Integer> record, List<Integer> user, List<Integer> prog, int input, String turn){
         // System.out.println(input);
         int i = 0;
         boolean copy = true;
@@ -30,9 +30,9 @@ public class Main {
         }else {
             record.add(input);
             copy = false;
-            if(turn == 0){
+            if(turn.equals("y")){
                 user.add(input);
-            } else  if(turn == 1){
+            } else  if(turn.equals("n")){
                 prog.add(input);
             }
         }        
@@ -116,10 +116,9 @@ public class Main {
             } else if(prog.containsAll(b)){
                 System.out.println("\n> Program win !\n");
                 carryon = false;
-            }
+            } 
         }
         // System.out.println(record);
-
 
         return carryon;
     }
@@ -129,7 +128,7 @@ public class Main {
         Scanner scan = new Scanner(System.in);
         Random ran = new Random(10);
         String[][] board = {{" ", "|", " ", "|", " "},{"-", "+", "-", "+", "-"},{" ", "|", " ", "|", " "},{"-", "+", "-", "+", "-"},{" ", "|", " ", "|", " "}};
-
+        
         List<Integer> record = new ArrayList<>();
         record.add(0);
         List<Integer> user = new ArrayList<>();
@@ -138,30 +137,36 @@ public class Main {
         prog.add(0);
         int position = 0;
         // int point = 0;
-        int turn = 0;
+        String turn = "y";
         
         getBoard(board);
+        System.out.println("\n> Would you like to start first ? (y/n)..\n");
+        try {
+            turn =  scan.nextLine();
+        } catch (java.util.InputMismatchException e) {
+        }
+
         while(showBoard(record, user, prog) && record.size() <= 9){
                     
             switch (turn) {
-                case 0: 
-                    System.out.println("\n> Your turn, Key in a number(1-9)..\n1");
+                case "y": 
+                    System.out.println("\n> Your turn, Key in a number(1-9)..\n");
                     position =  scan.nextInt();
                     while(checkBoard(record, user, prog, position, turn)){
                         System.out.println("\n> Select an empty slot..\n");
                         position =  scan.nextInt();
                     }
                     updateBoard(board, position, "X");
-                    turn = 1;
+                    turn = "n";
                     break;
-                case 1: 
+                case "n": 
                     System.out.println("\n> Program turn..\n");
-                    int point = ran.ints(1, 9).findFirst().getAsInt();
+                    int point = ran.ints(1, 10).findFirst().getAsInt();
                     while(checkBoard(record, user, prog, point, turn)){
-                        point = ran.ints(1, 9).findFirst().getAsInt();
+                        point = ran.ints(1, 10).findFirst().getAsInt();
                     }
                     updateBoard(board, point, "O");
-                    turn = 0;
+                    turn = "y";
                     break;
                 // default throw new AssertionError();
             }
